@@ -1,6 +1,7 @@
 package com.devsuperior.dscommerce.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.engine.spi.CascadeStyle;
 
 import java.time.Instant;
 
@@ -19,6 +20,9 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 
     public Order() {
     }
