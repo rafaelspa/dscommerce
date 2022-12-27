@@ -1,7 +1,6 @@
 package com.devsuperior.dscommerce.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.engine.spi.CascadeStyle;
 
 import java.time.Instant;
 
