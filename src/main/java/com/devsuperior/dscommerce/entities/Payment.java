@@ -1,7 +1,6 @@
 package com.devsuperior.dscommerce.entities;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
