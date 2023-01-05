@@ -1,6 +1,6 @@
 package com.devsuperior.dscommerce.services;
 
-import com.devsuperior.dscommerce.dto.ProductDto;
+import com.devsuperior.dscommerce.dto.ProductDTO;
 import com.devsuperior.dscommerce.entities.Product;
 import com.devsuperior.dscommerce.repositories.ProductRepository;
 import com.devsuperior.dscommerce.services.exceptions.DatabaseException;
@@ -23,34 +23,34 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Transactional(readOnly = true)
-    public ProductDto findById(Long id) {
+    public ProductDTO findById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Recurso não encontrado")
         );
-        return new ProductDto(product);
+        return new ProductDTO(product);
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductDto> findAll(Pageable pageable) {
+    public Page<ProductDTO> findAll(Pageable pageable) {
         Page<Product> result = productRepository.findAll(pageable);
-        return result.map(ProductDto::new);
+        return result.map(ProductDTO::new);
     }
 
     @Transactional
-    public ProductDto insert(ProductDto dto) {
+    public ProductDTO insert(ProductDTO dto) {
         Product entity = new Product();
         copyDtoToEntity(dto, entity);
         entity = productRepository.save(entity);
-        return new ProductDto(entity);
+        return new ProductDTO(entity);
     }
 
     @Transactional
-    public ProductDto update(Long id, ProductDto dto) {
+    public ProductDTO update(Long id, ProductDTO dto) {
         try {
             Product entity = productRepository.getReferenceById(id);
             copyDtoToEntity(dto, entity);
             entity = productRepository.save(entity);
-            return new ProductDto(entity);
+            return new ProductDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Recurso não encontrado");
         }
@@ -67,7 +67,7 @@ public class ProductService {
         }
     }
 
-    private void copyDtoToEntity(ProductDto dto, Product entity) {
+    private void copyDtoToEntity(ProductDTO dto, Product entity) {
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
         entity.setImgUrl(dto.getImgUrl());

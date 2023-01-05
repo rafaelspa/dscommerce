@@ -1,6 +1,6 @@
 package com.devsuperior.dscommerce.controllers;
 
-import com.devsuperior.dscommerce.dto.ProductDto;
+import com.devsuperior.dscommerce.dto.ProductDTO;
 import com.devsuperior.dscommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,20 +21,20 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ProductDto> findById(@PathVariable Long id) {
-            ProductDto dto = productService.findById(id);
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
+            ProductDTO dto = productService.findById(id);
             return ResponseEntity.ok(dto);
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDto>> findAll(Pageable pageable) {
-        Page<ProductDto> result = productService.findAll(pageable);
+    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
+        Page<ProductDTO> result = productService.findAll(pageable);
         return ResponseEntity.ok(result);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<ProductDto> insert(@Valid @RequestBody ProductDto dto) {
+    public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
         dto = productService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
@@ -43,7 +43,7 @@ public class ProductController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDto> update(@PathVariable Long id, @Valid @RequestBody ProductDto dto) {
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto) {
         dto = productService.update(id, dto);
         return ResponseEntity.ok(dto);
     }

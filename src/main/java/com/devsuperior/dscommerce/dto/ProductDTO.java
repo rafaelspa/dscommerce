@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-public class ProductDto {
+public class ProductDTO {
 
     private Long id;
     @Size(min = 3, max = 80, message = "Nome precisa ter de 3 a 80 caracteres")
@@ -19,7 +19,7 @@ public class ProductDto {
     private Double price;
     private String imgUrl;
 
-    public ProductDto(Long id, String name, String description, Double price, String imgUrl) {
+    public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -27,7 +27,7 @@ public class ProductDto {
         this.imgUrl = imgUrl;
     }
 
-    public ProductDto(Product entity) {
+    public ProductDTO(Product entity) {
         id = entity.getId();
         name = entity.getName();
         description = entity.getDescription();
